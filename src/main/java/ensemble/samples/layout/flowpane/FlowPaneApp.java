@@ -41,7 +41,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 /**
- * A simple example of a FlowPane layout.
+ * 一个简单的FlowPane布局示例。
  *
  * @sampleName FlowPane
  * @preview preview.png

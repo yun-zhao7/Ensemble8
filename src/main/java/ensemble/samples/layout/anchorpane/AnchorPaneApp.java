@@ -43,7 +43,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A simple example of an AnchorPane layout.
+ * 锚窗格布局的简单示例。
  *
  * @sampleName AnchorPane
  * @preview preview.png
@@ -69,11 +69,11 @@ public class AnchorPaneApp extends Application {
     public Parent createContent() {
         AnchorPane anchorPane = new AnchorPane();
 
-        Label label1 = new Label("We are all in an AnchorPane.");
+        Label label1 = new Label("我们都在锚固板上。");
         String IMAGE = "/ensemble/samples/shared-resources/icon-48x48.png";
         Image ICON_48 = new Image(getClass().getResourceAsStream(IMAGE));
         ImageView imageView = new ImageView(ICON_48);
-        Button button1 = new Button("Submit");
+        Button button1 = new Button("提交");
 
         anchorPane.getChildren().addAll(label1, imageView, button1);
 

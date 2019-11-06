@@ -45,8 +45,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * An example of  a BorderPane layout, with placement of children in the top,
- * left, center, right, and bottom positions.
+ * BorderPane布局的一个示例，其中将子元素放置在顶部、左侧、中间、右侧和底部位置。
  *
  * @sampleName BorderPane
  * @preview preview.png
@@ -96,13 +95,13 @@ public class BorderPaneApp extends Application {
         borderPane.setRight(rightVbox);
 
         //Center content
-        Label centerLabel = new Label("Center area.");
+        Label centerLabel = new Label("中心区域。");
         centerLabel.setWrapText(true);
         String IMAGE = "/ensemble/samples/shared-resources/icon-48x48.png";
         Image ICON_48 = new Image(getClass().getResourceAsStream(IMAGE));
         ImageView imageView = new ImageView(ICON_48);
 
-        //Using AnchorPane only to position items in the center
+        //仅使用锚定窗格将项目定位在中心
         AnchorPane centerAP = new AnchorPane();
         AnchorPane.setTopAnchor(centerLabel, Double.valueOf(5));
         AnchorPane.setLeftAnchor(centerLabel, Double.valueOf(20));
