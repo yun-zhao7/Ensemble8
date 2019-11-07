@@ -1,50 +1,9 @@
-/*
- * Copyright (c) 2008, 2017, Oracle and/or its affiliates.
- * All rights reserved. Use is subject to license terms.
- *
- * This file is available and licensed under the following license:
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *  - Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the distribution.
- *  - Neither the name of Oracle Corporation nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 package ensemble.app;
-
 
 import ensemble.app.control.Popover;
 import ensemble.app.control.SearchBox;
 import ensemble.app.control.TitledToolBar;
 import ensemble.generated.Samples;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -67,6 +26,15 @@ import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Ensemble Application
@@ -109,10 +77,12 @@ public class EnsembleApp extends Application {
         Logger.getLogger(EnsembleApp.class.getName()).finer("IS_DESKTOP = " + IS_DESKTOP);
     }
 
-    @Override public void init() throws Exception {
+    @Override
+    public void init() throws Exception {
         // CREATE ROOT
         root = new Pane() {
-            @Override protected void layoutChildren() {
+            @Override
+            protected void layoutChildren() {
                 super.layoutChildren();
                 final double w = getWidth();
                 final double h = getHeight();
@@ -123,15 +93,15 @@ public class EnsembleApp extends Application {
                 }
                 toolBar.resizeRelocate(0, menuHeight, w, toolBarHeight);
                 pageBrowser.setLayoutY(toolBarHeight + menuHeight);
-                pageBrowser.resize(w, h-toolBarHeight);
+                pageBrowser.resize(w, h - toolBarHeight);
                 pageBrowser.resize(w, h - toolBarHeight - menuHeight);
                 sampleListPopover.autosize();
-                Point2D listBtnBottomCenter = listButton.localToScene(listButton.getWidth()/2, listButton.getHeight());
-                sampleListPopover.setLayoutX((int)listBtnBottomCenter.getX()-50);
-                sampleListPopover.setLayoutY((int)listBtnBottomCenter.getY()+20);
-                Point2D searchBoxBottomCenter = searchBox.localToScene(searchBox.getWidth()/2, searchBox.getHeight());
-                searchPopover.setLayoutX((int)searchBoxBottomCenter.getX()-searchPopover.getLayoutBounds().getWidth()+50);
-                searchPopover.setLayoutY((int)searchBoxBottomCenter.getY()+20);
+                Point2D listBtnBottomCenter = listButton.localToScene(listButton.getWidth() / 2, listButton.getHeight());
+                sampleListPopover.setLayoutX((int) listBtnBottomCenter.getX() - 50);
+                sampleListPopover.setLayoutY((int) listBtnBottomCenter.getY() + 20);
+                Point2D searchBoxBottomCenter = searchBox.localToScene(searchBox.getWidth() / 2, searchBox.getHeight());
+                searchPopover.setLayoutX((int) searchBoxBottomCenter.getX() - searchPopover.getLayoutBounds().getWidth() + 50);
+                searchPopover.setLayoutY((int) searchBoxBottomCenter.getY() + 20);
             }
         };
         // CREATE MENUBAR
@@ -154,7 +124,6 @@ public class EnsembleApp extends Application {
                     screenSizeMenuItem("iPhone 5 Portrait", 640, 1136, true, screenSizeToggle));
             menuBar.getMenus().add(menu);
             screenSizeToggle.selectToggle(screenSizeToggle.getToggles().get(0));
-
             root.getChildren().add(menuBar);
         }
         // CREATE TOOLBAR
@@ -172,7 +141,7 @@ public class EnsembleApp extends Application {
         homeButton.setId("home");
         homeButton.setPrefSize(TOOL_BAR_BUTTON_SIZE, TOOL_BAR_BUTTON_SIZE);
         homeButton.getStyleClass().add("right-pill");
-        HBox navButtons = new HBox(0,backButton,forwardButton,homeButton);
+        HBox navButtons = new HBox(0, backButton, forwardButton, homeButton);
         listButton = new ToggleButton();
         listButton.setId("list");
         listButton.setPrefSize(TOOL_BAR_BUTTON_SIZE, TOOL_BAR_BUTTON_SIZE);
@@ -186,9 +155,8 @@ public class EnsembleApp extends Application {
         homeButton.setGraphic(new Region());
         listButton.setGraphic(new Region());
         searchButton.setGraphic(new Region());
-        toolBar.addLeftItems(navButtons,listButton);
+        toolBar.addLeftItems(navButtons, listButton);
         toolBar.addRightItems(searchBox);
-
         // create PageBrowser
         pageBrowser = new PageBrowser();
         toolBar.titleTextProperty().bind(pageBrowser.currentPageTitleProperty());
@@ -207,12 +175,11 @@ public class EnsembleApp extends Application {
             pageBrowser.goHome();
         });
         homeButton.disableProperty().bind(pageBrowser.atHomeProperty());
-
         // create and setup list popover
         sampleListPopover = new Popover();
         sampleListPopover.setPrefWidth(440);
         root.getChildren().add(sampleListPopover);
-        final SamplePopoverTreeList rootPage = new SamplePopoverTreeList(Samples.ROOT,pageBrowser);
+        final SamplePopoverTreeList rootPage = new SamplePopoverTreeList(Samples.ROOT, pageBrowser);
         listButton.setOnMouseClicked((MouseEvent e) -> {
             if (sampleListPopover.isVisible()) {
                 sampleListPopover.hide();
@@ -224,7 +191,6 @@ public class EnsembleApp extends Application {
                 });
             }
         });
-
         // create AndroidStyle menu handling
         if (IS_ANDROID) {
             root.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -238,7 +204,6 @@ public class EnsembleApp extends Application {
                             event.consume();
                             return;
                         }
-
                         if (!backButton.isDisabled()) {
                             pageBrowser.backward();
                             event.consume();
@@ -251,7 +216,6 @@ public class EnsembleApp extends Application {
                     } else {
                         exitCount = 0;
                     }
-
                     if (event.getCode() == KeyCode.CONTEXT_MENU) {
                         if (sampleListPopover.isVisible()) {
                             sampleListPopover.hide();
@@ -267,9 +231,8 @@ public class EnsembleApp extends Application {
                 }
             });
         }
-
         // create and setup search popover
-        searchPopover = new SearchPopover(searchBox,pageBrowser);
+        searchPopover = new SearchPopover(searchBox, pageBrowser);
         root.getChildren().add(searchPopover);
     }
 
@@ -288,15 +251,15 @@ public class EnsembleApp extends Application {
                     scene.setRoot(newRoot);
                     newRoot.getChildren().add(root);
                     root.getTransforms().add(new Scale(2, 2, 0, 0));
-                    root.resize(width/2, height/2);
+                    root.resize(width / 2, height / 2);
                 } else {
-                    root.getChildrenUnmodifiable().get(0).resize(width/2, height/2);
+                    root.getChildrenUnmodifiable().get(0).resize(width / 2, height / 2);
                 }
             } else {
                 Parent root = scene.getRoot();
                 if (root instanceof Group) {
-                    Pane oldRoot = (Pane)root.getChildrenUnmodifiable().get(0);
-                    ((Group)root).getChildren().clear();
+                    Pane oldRoot = (Pane) root.getChildrenUnmodifiable().get(0);
+                    ((Group) root).getChildren().clear();
                     oldRoot.getTransforms().clear();
                     scene.setRoot(oldRoot);
                 }
@@ -315,26 +278,25 @@ public class EnsembleApp extends Application {
                         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
                         Reader newReader = Channels.newReader(rbc, "ISO-8859-1");
                         BufferedReader bufferedReader = new BufferedReader(newReader)
-                        ) {
+                ) {
                     // Checking whether we can read a line from this url
                     // without exception
                     bufferedReader.readLine();
                 }
-                Platform.runLater(() -> {
-                    // when succeeded add this stylesheet to the scene
-                    scene.getStylesheets().add(EXTERNAL_STYLESHEET);
-                });
-            }catch (MalformedURLException ex) {
+                // when succeeded add this stylesheet to the scene
+                Platform.runLater(() -> scene.getStylesheets().add(EXTERNAL_STYLESHEET));
+            } catch (MalformedURLException ex) {
                 Logger.getLogger(EnsembleApp.class.getName()).log(Level.FINE, "Failed to load external stylesheet", ex);
-            }catch (IOException ex) {
-                    Logger.getLogger(EnsembleApp.class.getName()).log(Level.FINE, "Failed to load external stylesheet", ex);
-                }
+            } catch (IOException ex) {
+                Logger.getLogger(EnsembleApp.class.getName()).log(Level.FINE, "Failed to load external stylesheet", ex);
+            }
         }, "Trying to reach external styleshet");
         backgroundThread.setDaemon(true);
         backgroundThread.start();
     }
 
-    @Override public void start(final Stage stage) throws Exception {
+    @Override
+    public void start(final Stage stage) throws Exception {
         // CREATE SCENE
         // #f4f4f4 is the background color defined in the css resource and SourceTab.java
         scene = new Scene(root, 1024, 768, Color.web("#f4f4f4"));
