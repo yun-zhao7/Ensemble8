@@ -51,13 +51,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * An example of a GridPane layout. There is more than one approach to using a
- * GridPane. The code can specify which rows and/or columns should
- * contain the content. Alternatively, the code can alter the constraints of the
- * rows and/or columns themselves, either by specifying the preferred minimum
- * or  maximum heights or widths, or by specifying the percentage of the
- * GridPane that belongs to certain rows or columns.  Note that grid lines can be
- * made visible to help in debugging.
+ * GridPane布局的一个示例。 使用GridPane有多种方法。代码可以指定哪些行和/或列应该包含内容。
+ * 或者，代码可以更改行和/或列本身的约束，方法是指定首选的最小或最大高度或宽度，或者指定属于
+ * 某些行或列的GridPane的百分比。请注意，可以使网格线可见以帮助调试。
  *
  * @sampleName GridPane
  * @preview preview.png
@@ -82,20 +78,17 @@ public class GridPaneApp extends Application {
     public Parent createContent() {
         VBox vbox = new VBox();
 
-        String percent =
-            "Content placement by influencing row and column percentages.";
+        String percent = "通过影响行和列的百分比来放置内容。";
         Label gridPerCaption = new Label(percent);
         gridPerCaption.setWrapText(true);
         GridPane gridPer = createGridPanePercentage();
 
-        String them =
-            "Content placement by influencing the rows and columns themselves:";
+        String them = "通过影响行和列本身来安排内容:";
         Label gridRCInfoCaption = new Label(them);
         gridRCInfoCaption.setWrapText(true);
         GridPane gridRCInfo = createGridPaneRCInfo();
 
-        String specify =
-            "Content placement by specifying rows and columns:";
+        String specify = "通过指定行和列放置内容:";
         Label gridConstCaption = new Label(specify);
         gridConstCaption.setWrapText(true);
         GridPane gridConst = createGridPaneConst();

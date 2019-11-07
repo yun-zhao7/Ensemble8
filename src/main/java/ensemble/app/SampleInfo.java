@@ -56,9 +56,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**
- * Descriptor for a ensemble sample. Everything the ui needs is determined at
- * compile time from the sample sources and stored in these SampleInfo objects so
- * we don't have to calculate anything at runtime.
+ * ensemble sample的描述符。ui需要的所有东西都是在编译时从示例源中确定的，
+ * 并存储在这些SampleInfo对象中，因此我们不必在运行时计算任何东西。
  */
 public class SampleInfo {
 
