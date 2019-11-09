@@ -28,7 +28,7 @@ public class DocsPage extends Region implements ChangeListener<String>, Page{
     private boolean isLocalChange = false;
     private boolean showSideBar = false;
 
-    public DocsPage(PageBrowser pageBrowser) {
+    DocsPage(PageBrowser pageBrowser) {
         this.pageBrowser = pageBrowser;
         getChildren().add(webView);
         scrollPane.setContent(sideBar);
@@ -61,7 +61,7 @@ public class DocsPage extends Region implements ChangeListener<String>, Page{
         updateSidebar(newLocation);
     }
 
-    public void goToUrl(String url) {
+    void goToUrl(String url) {
         isLocalChange = true;
         webView.getEngine().load(url);
         isLocalChange = false;
@@ -102,9 +102,7 @@ public class DocsPage extends Region implements ChangeListener<String>, Page{
                 sampleButton.getStyleClass().setAll("sample-button");
                 sampleButton.setGraphic(sample.getMediumPreview());
                 sampleButton.setContentDisplay(ContentDisplay.TOP);
-                sampleButton.setOnAction((ActionEvent actionEvent) -> {
-                    pageBrowser.goToSample(sample);
-                });
+                sampleButton.setOnAction((ActionEvent actionEvent) -> pageBrowser.goToSample(sample));
                 sideBar.getChildren().add(sampleButton);
             }
             if (!showSideBar) getChildren().add(scrollPane);
