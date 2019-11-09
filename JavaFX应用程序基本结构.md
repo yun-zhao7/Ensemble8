@@ -1,0 +1,7 @@
+JavaFX应用程序的主类扩展了javafx.application.Application类。该start()方法是所有JavaFX应用程序的主要入口点。
+
+JavaFX应用程序通过Stage和Scene定义用户界面容器。JavaFX Stage类是顶级JavaFX容器。JavaFX Scene类是所有内容的容器。
+
+在JavaFX中，场景的内容表示为节点的分层场景图。
+
+main()当使用JavaFX Packager工具创建应用程序的JAR文件时，该方法对于JavaFX应用程序不是必需的，该工具将JavaFX Launcher嵌入到JAR文件中。但是，包含该main()方法很有用，这样您就可以运行在没有JavaFX Launcher的情况下创建的JAR文件，例如，在使用未完全集成JavaFX工具的IDE时。同样，嵌入JavaFX代码的Swing应用程序也需要该main()方法。
