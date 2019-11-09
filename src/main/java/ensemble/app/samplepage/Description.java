@@ -51,6 +51,8 @@ import static ensemble.app.samplepage.SamplePageContent.title;
 import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 
+import java.util.logging.Logger;
+
 /**
  * Description Section on Sample Page
  */

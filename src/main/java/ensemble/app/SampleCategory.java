@@ -66,8 +66,12 @@ public class SampleCategory {
         if (samples!=null) for (SampleInfo sample: samples) {
             if (sample.name.equals(part)) return sample;
         }
-        if (subCategories!=null) for (SampleCategory category: subCategories) {
-            if (category.name.equals(part)) return category.sampleForPath(pathParts, index + 1);
+        if (subCategories!=null) {
+            for (SampleCategory category: subCategories) {
+                if (category.name.equals(part)) {
+                    return category.sampleForPath(pathParts, index + 1);
+                }
+            }
         }
         return null;
     }
