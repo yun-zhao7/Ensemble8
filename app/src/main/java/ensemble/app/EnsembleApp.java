@@ -282,7 +282,7 @@ public class EnsembleApp extends Application {
                     // without exception
                     bufferedReader.readLine();
                 }
-                // when succeeded add this stylesheet to the scene
+                // 成功后，将此样式表添加到场景中
                 Platform.runLater(() -> scene.getStylesheets().add(EXTERNAL_STYLESHEET));
             } catch (MalformedURLException ex) {
                 Logger.getLogger(EnsembleApp.class.getName()).log(Level.FINE, "Failed to load external stylesheet", ex);
