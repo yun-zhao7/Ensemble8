@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="samples" />
+        <module name="app" />
+        <module name="compiletime" />
+        <module name="compass" />
+        <module name="generator" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="app" target="11" />
+      <module name="compass" target="11" />
+      <module name="compiletime" target="11" />
+      <module name="Ensemble8" target="11" />
+      <module name="generator" target="11" />
+      <module name="samples" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
